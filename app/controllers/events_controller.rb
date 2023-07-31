@@ -7,6 +7,7 @@ class EventsController < ApplicationController
 
     def show
         @event = Event.find(params[:id])
+        @attendees = @event.attendees
     end
 
     def create
@@ -17,7 +18,8 @@ class EventsController < ApplicationController
         else
           render :new
         end
-      end
+    end
+    
     
       # ... other actions ...
       

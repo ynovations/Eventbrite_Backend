@@ -2,3 +2,20 @@
 
 <p>Date: <%= @event.date.strftime("%B %d, %Y") %></p>
 <p>Location: <%= @event.location %></p>
+
+<% if current_user.attending?(@event) %>
+  <%= link_to 'Cancel Attendance', attendance_path(@event.attendance_for(current_user)), method: :delete %>
+<% else %>
+  <%= link_to 'Attend', attendances_path(event_id: @event.id), method: :post %>
+<% end %>
+
+<h2>Attendees:</h2>
+<% if @attendees.any? %>
+  <ul>
+    <% @attendees.each do |attendee| %>
+      <li><%= attendee.username %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No attendees yet.</p>
+<% end %>

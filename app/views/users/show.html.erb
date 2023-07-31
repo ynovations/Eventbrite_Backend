@@ -9,3 +9,38 @@
 <% else %>
   <p>No events created yet.</p>
 <% end %>
+
+<h2>Attended Events:</h2>
+<% if @attended_events.any? %>
+  <ul>
+    <% @attended_events.each do |event| %>
+      <li><%= link_to event.title, event_path(event) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No attended events yet.</p>
+<% end %>
+
+<h2>Past Attended Events:</h2>
+<% past_events = @attended_events.select { |event| event.date < Date.today } %>
+<% if past_events.any? %>
+  <ul>
+    <% past_events.each do |event| %>
+      <li><%= link_to event.title, event_path(event) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No past attended events.</p>
+<% end %>
+
+<h2>Future Attended Events:</h2>
+<% future_events = @attended_events.select { |event| event.date >= Date.today } %>
+<% if future_events.any? %>
+  <ul>
+    <% future_events.each do |event| %>
+      <li><%= link_to event.title, event_path(event) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No future attended events.</p>
+<% end %>

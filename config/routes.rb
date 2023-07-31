@@ -8,8 +8,11 @@ Rails.application.routes.draw do
 
   root 'events#index'
 
-  resources :events, only: [:index, :new, :create, :show]
+  resources :events, only: [:index, :new, :create, :show] do
+    post 'attend', on: :member
+  end
   resources :users, only: [:show]
+  resources :attendances, only: [:create, :destroy]
 
 
 end
