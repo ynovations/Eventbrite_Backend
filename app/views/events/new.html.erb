@@ -1,3 +1,5 @@
+<!--
+
 <h1>New Event</h1>
 
 <%= form_with model: @event, url: events_path do |form| %>
@@ -18,3 +20,28 @@
 
   <%= form.submit 'Create Event' %>
 <% end %>
+
+-->
+
+<h1>New Event</h1>
+
+<form action="<%= events_path %>" method="post">
+  <%= csrf_meta_tags %>
+
+  <div>
+    <label for="event_title">Title</label>
+    <input type="text" name="event[title]" id="event_title" />
+  </div>
+
+  <div>
+    <label for="event_location">Location</label>
+    <input type="text" name="event[location]" id="event_location" />
+  </div>
+
+  <div>
+    <label for="event_date">Date</label>
+    <input type="date" name="event[date]" id="event_date" />
+  </div>
+
+  <input type="submit" value="Create Event" />
+</form>
