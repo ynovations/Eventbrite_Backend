@@ -8,11 +8,15 @@ Rails.application.routes.draw do
 
   root 'events#index'
 
-  resources :events, only: [:index, :new, :create, :show] do
+  resources :events, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
     post 'attend', on: :member
+    get 'invite', on: :member
+    patch 'send_invitations', on: :member
   end
   resources :users, only: [:show]
+
   resources :attendances, only: [:create, :destroy]
+  delete 'remove_attendance/:id', to: 'attendances#remove_attendance', as: 'remove_attendance'
 
 
 end

@@ -9,3 +9,25 @@
 <% end %>
 
 <%= link_to 'Create New Event', new_event_path %>
+
+<h1>Upcoming Events</h1>
+<% if @upcoming_events.any? %>
+  <ul>
+    <% @upcoming_events.each do |event| %>
+      <li><%= link_to event.title, event_path(event) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No upcoming events.</p>
+<% end %>
+
+<h1>Past Events</h1>
+<% if @past_events.any? %>
+  <ul>
+    <% @past_events.each do |event| %>
+      <li><%= link_to event.title, event_path(event) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No past events.</p>
+<% end %>

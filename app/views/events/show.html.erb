@@ -3,10 +3,16 @@
 <p>Date: <%= @event.date.strftime("%B %d, %Y") %></p>
 <p>Location: <%= @event.location %></p>
 
-<% if current_user.attending?(@event) %>
-  <%= link_to 'Cancel Attendance', attendance_path(@event.attendance_for(current_user)), method: :delete %>
+<% if current_user == @event.creator %>
+  <%= link_to 'Edit', edit_event_path(@event) %>
+  <%= link_to 'Delete', @event, method: :delete, data: { confirm: 'Are you sure you want to delete this event?' } %>
+  <%= link_to 'Invite Users', invite_event_path(@event) %>
 <% else %>
-  <%= link_to 'Attend', attendances_path(event_id: @event.id), method: :post %>
+  <% if current_user.attending?(@event) %>
+    <%= link_to 'Cancel Attendance', remove_attendance_path(@event.attendance_for(current_user)), method: :delete, data: { confirm: 'Are you sure you want to cancel your attendance?' } %>
+  <% else %>
+    <%= link_to 'Attend', attendances_path(event_id: @event.id), method: :post %>
+  <% end %>
 <% end %>
 
 <h2>Attendees:</h2>

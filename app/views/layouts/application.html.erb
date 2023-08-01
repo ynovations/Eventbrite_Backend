@@ -11,6 +11,18 @@
   </head>
 
   <body>
+  
+  <nav>
+  <ul>
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Events', events_path %></li>
+    <% if user_signed_in? %>
+      <li><%= link_to 'My Profile', user_path(current_user) %></li>
+    <% end %>
+  </ul>
+  </nav>
+
     <%= yield %>
+
   </body>
 </html>

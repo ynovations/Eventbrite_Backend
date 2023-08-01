@@ -1,0 +1,13 @@
+
+
+<h1>Invite Users to <%= @event.title %></h1>
+
+<%= form_with model: @event, url: send_invitations_event_path(@event) do |form| %>
+  <% @invitees.each do |invitee| %>
+    <div>
+      <%= check_box_tag 'event[invitee_ids][]', invitee.id, @event.invitees.include?(invitee) %>
+      <%= label_tag invitee.username %>
+    </div>
+  <% end %>
+  <%= form.submit 'Send Invitations' %>
+<% end %>
