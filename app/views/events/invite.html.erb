@@ -6,7 +6,7 @@
   <% @invitees.each do |invitee| %>
     <div>
       <%= check_box_tag 'event[invitee_ids][]', invitee.id, @event.invitees.include?(invitee) %>
-      <%= label_tag invitee.username %>
+      <%= label_tag invitee.email %>
     </div>
   <% end %>
   <%= form.submit 'Send Invitations' %>

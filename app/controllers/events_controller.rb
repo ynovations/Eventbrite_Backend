@@ -12,19 +12,25 @@ class EventsController < ApplicationController
         @attendees = @event.attendees
     end
 
-    def create
-        @event = current_user.created_events.build(event_params)
-    
-        if @event.save
-          redirect_to @event, notice: 'Event was successfully created.'
-        else
-          render :new
-        end
+    def new
+      @event = Event.new
     end
+
+    def create
+      @event = current_user.created_events.build(event_params)
+  
+      if @event.save
+        redirect_to @event, notice: 'Event was successfully created.'
+      else
+        render :new
+      end
+    end
+
 
     def edit
       @event = Event.find(params[:id])
     end
+
   
     def update
       @event = Event.find(params[:id])
@@ -36,6 +42,7 @@ class EventsController < ApplicationController
     end
   
     def destroy
+      puts "Destroy action is being called"
       @event = Event.find(params[:id])
       @event.destroy
       redirect_to events_path, notice: 'Event was successfully deleted.'
